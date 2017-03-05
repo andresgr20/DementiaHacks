@@ -7,28 +7,22 @@ import java.util.Date;
  */
 
 public class ActivityTemplate {
-	private int _id;
+	private long _id;
 	private String name;
 	private String description;
-	private int creatorId;
+	private long creatorId;
+	private long patientId;
 	private String idealLocation;
 	private Date timeStarted;
 
-	public ActivityTemplate(int _id, String name, String description, int creatorId, String idealLocation, Date timeStarted) {
-		this._id = _id;
+	public ActivityTemplate(long _id, String name, String description, long patientId, long creatorId, String idealLocation, Date timeStarted) {
+		this.set_id(_id);
 		this.name = name;
 		this.description = description;
-		this.creatorId = creatorId;
+		this.setPatientId(patientId);
+		this.setCreatorId(creatorId);
 		this.idealLocation = idealLocation;
 		this.timeStarted = timeStarted;
-	}
-
-	public int get_id() {
-		return _id;
-	}
-
-	public void set_id(int _id) {
-		this._id = _id;
 	}
 
 	public String getName() {
@@ -47,14 +41,6 @@ public class ActivityTemplate {
 		this.description = description;
 	}
 
-	public int getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
-	}
-
 	public String getIdealLocation() {
 		return idealLocation;
 	}
@@ -69,5 +55,29 @@ public class ActivityTemplate {
 
 	public void setTimeStarted(Date timeStarted) {
 		this.timeStarted = timeStarted;
+	}
+
+	public void set_id(long _id) {
+		this._id = _id;
+	}
+
+	public void setCreatorId(long creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public long getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(long patientId) {
+		this.patientId = patientId;
+	}
+
+	public long get_id() {
+		return _id;
+	}
+
+	public long getCreatorId() {
+		return creatorId;
 	}
 }

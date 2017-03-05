@@ -19,10 +19,10 @@ public class UserDbHelper extends SQLiteOpenHelper {
 
 	@Override public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE "+ UserEntry.TABLE_NAME + " (" +
-		UserEntry._ID + " INTEGER PRIMARY KEY" +
-		UserEntry.COLUMN_NAME_ROLE + " TEXT" +
-		UserEntry.COLUMN_NAME_USERNAME + " TEXT" +
-		UserEntry.COLUMN_NAME_NAME + " TEXT" +
+		UserEntry._ID + " INTEGER PRIMARY KEY, " +
+		UserEntry.COLUMN_NAME_ROLE + " TEXT, " +
+		UserEntry.COLUMN_NAME_USERNAME + " TEXT, " +
+		UserEntry.COLUMN_NAME_NAME + " TEXT, " +
 		UserEntry.COLUMN_NAME_PASSWORD + " TEXT)");
 	}
 
@@ -43,6 +43,18 @@ public class UserDbHelper extends SQLiteOpenHelper {
 	}
 
 	public User getUser(String username) {
+		String selection = UserEntry.COLUMN_NAME_USERNAME + " = ?";
+		String[] selectionsArgs = { username };
+		return getUserFn(selection, selectionsArgs);
+	}
+
+	public User getUser(long _id) {
+		String selection = UserEntry._ID + " = ?";
+		String[] selectionsArgs = { Long.valueOf(_id).toString()};
+		return getUserFn(selection, selectionsArgs);
+	}
+
+	private User getUserFn(String selection, String[] selectionsArgs) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String[] projection = {
 				UserEntry._ID,
@@ -51,8 +63,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
 				UserEntry.COLUMN_NAME_USERNAME,
 				UserEntry.COLUMN_NAME_ROLE
 		};
-		String selection = UserEntry.COLUMN_NAME_USERNAME + " = ?";
-		String[] selectionsArgs = { username };
 		Cursor cursor = db.query(
 				UserEntry.TABLE_NAME,
 				projection,
