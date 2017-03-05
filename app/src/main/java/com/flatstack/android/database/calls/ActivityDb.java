@@ -1,4 +1,4 @@
-package com.flatstack.android.database.helpers;
+package com.flatstack.android.database.calls;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ActivityDbHelper extends SQLiteOpenHelper {
+public class ActivityDb extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "Activity.db";
 	private static final String[] projection = {
 			ActivityEntry._ID,
@@ -23,11 +23,11 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 			ActivityEntry.COLUMN_NAME_TIME_STARTED,
 			ActivityEntry.COLUMN_NAME_ACTIVITY_TEMPLATE_ID
 	};
-	private static ActivityTemplateDbHelper activityTemplateDbHelper;
+	private static ActivityTemplateDb activityTemplateDb;
 
-	public ActivityDbHelper(Context context) {
+	public ActivityDb(Context context) {
 		super(context, DATABASE_NAME, null, 1);
-		activityTemplateDbHelper = new ActivityTemplateDbHelper(context);
+		activityTemplateDb = new ActivityTemplateDb(context);
 	}
 
 	@Override public void onCreate(SQLiteDatabase db) {
@@ -81,7 +81,7 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 		List<Activity> templates = new ArrayList<>();
 		while (cursor.moveToNext()) {
 			long _id = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityEntry._ID));
-			ActivityTemplate template = activityTemplateDbHelper.getActivityTemplateByID(
+			ActivityTemplate template = activityTemplateDb.getActivityTemplateByID(
 					cursor.getLong(cursor.getColumnIndexOrThrow(ActivityEntry.COLUMN_NAME_ACTIVITY_TEMPLATE_ID))
 			);
 			String location = cursor.getString(cursor.getColumnIndexOrThrow(ActivityEntry.COLUMN_NAME_LOCATION));

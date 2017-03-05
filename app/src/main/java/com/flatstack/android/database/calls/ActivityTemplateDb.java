@@ -1,4 +1,4 @@
-package com.flatstack.android.database.helpers;
+package com.flatstack.android.database.calls;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
+public class ActivityTemplateDb extends SQLiteOpenHelper {
 	private static final String[] projection = {
 			ActivityTemplateEntry._ID,
 			ActivityTemplateEntry.COLUMN_NAME_NAME,
@@ -23,7 +23,7 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 	};
 
 	private static final String DATABASE_NAME = "ActivityTemplate.db";
-	public ActivityTemplateDbHelper(Context context) {
+	public ActivityTemplateDb(Context context) {
 		super(context, DATABASE_NAME, null, 1);
 	}
 

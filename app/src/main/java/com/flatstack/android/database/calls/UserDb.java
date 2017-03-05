@@ -1,4 +1,4 @@
-package com.flatstack.android.database.helpers;
+package com.flatstack.android.database.calls;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.flatstack.android.database.contracts.UserContract.UserEntry;
 import com.flatstack.android.models.User;
 
-public class UserDbHelper extends SQLiteOpenHelper {
+public class UserDb extends SQLiteOpenHelper {
 
 	public static final String DATABASE_NAME = "User.db";
 
-	public UserDbHelper(Context context) {
+	public UserDb(Context context) {
 		super(context, DATABASE_NAME, null, 1);
 	}
 
