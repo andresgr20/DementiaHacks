@@ -25,7 +25,7 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 			ActivityTemplateEntry.COLUMN_NAME_TIME_STARTED
 	};
 
-	public static final String DATABASE_NAME = "ActivityTemplate.db";
+	private static final String DATABASE_NAME = "ActivityTemplate.db";
 	public ActivityTemplateDbHelper(Context context) {
 		super(context, DATABASE_NAME, null, 1);
 	}
