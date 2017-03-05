@@ -1,90 +1,25 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply from: 'checkstyle/checkstyle.gradle'
-
-ext {
-    APPLICATION_ID = "com.flatstack.android"
-
-    isTravis = "true".equals(System.getenv("TRAVIS")) // change if use not travis
-
-    commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
-}
 
 android {
-    compileSdkVersion TARGET_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
-
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
-
-        applicationId APPLICATION_ID
+        applicationId "com.example.andres.myapplication"
+        minSdkVersion 15
+        targetSdkVersion 25
         versionCode 1
-        versionName '0.1.0'
-
-//        TODO uncomment after fix https://code.google.com/p/android/issues/detail?id=202973
-//        and after annotation processing completed
-//        jackOptions { enabled true }
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
-    productFlavors {
-        staging {
-            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationIdSuffix ".staging"
-        }
-
-        production {
-            buildConfigField "String", "API_URL", "\"https://example.com\""
-        }
-    }
-
-//    signingConfigs {
-//        release {
-//            def props = new Properties()
-//            props.load(new FileInputStream(file("$rootDir/keys.properties")))
-//            storeFile file("$rootDir/your.jks")
-//            storePassword props['storePassword']
-//            keyAlias props['keyAlias']
-//            keyPassword props['keyPassword']
-//        }
-//    }
-
     buildTypes {
-        debug {
-        }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-    }
-
-    lintOptions {
-        textReport true
-        textOutput "stdout"
-        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-        disable 'InvalidPackage', 'GradleDependency'
-        lintConfig file("$projectDir/lint.xml")
-        warningsAsErrors true
-    }
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
 
@@ -99,13 +34,12 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
 
     testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+    compile 'com.android.support:design:25.1.1'
 }
-
-configurations {
-    testCompile.exclude module: 'commons-logging'
-    testCompile.exclude module: 'httpclient'
-}
-
-apply from: "quality.gradle"
