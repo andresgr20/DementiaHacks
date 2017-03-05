@@ -10,7 +10,9 @@ import com.flatstack.android.database.contracts.ActivityContract.ActivityEntry;
 import com.flatstack.android.models.Activity;
 import com.flatstack.android.models.ActivityTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityDbHelper extends SQLiteOpenHelper {
@@ -18,6 +20,7 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 	private static final String[] projection = {
 			ActivityEntry._ID,
 			ActivityEntry.COLUMN_NAME_LOCATION,
+			ActivityEntry.COLUMN_NAME_TIME_STARTED,
 			ActivityEntry.COLUMN_NAME_ACTIVITY_TEMPLATE_ID
 	};
 	private static ActivityTemplateDbHelper activityTemplateDbHelper;
@@ -31,6 +34,7 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + ActivityEntry.TABLE_NAME + " (" +
 				ActivityEntry._ID + " INTEGER PRIMARY KEY, " +
 				ActivityEntry.COLUMN_NAME_ACTIVITY_TEMPLATE_ID + " INTEGER, " +
+				ActivityEntry.COLUMN_NAME_TIME_STARTED + " TEXT, " +
 				ActivityEntry.COLUMN_NAME_LOCATION + " TEXT, " +
 				ActivityEntry.COLUMN_NAME_USER_ID + " INTEGER)");
 	}
@@ -45,6 +49,7 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(ActivityEntry.COLUMN_NAME_USER_ID, userId);
 		values.put(ActivityEntry.COLUMN_NAME_LOCATION, "");
+		values.put(ActivityEntry.COLUMN_NAME_TIME_STARTED, new Date().toString());
 		values.put(ActivityEntry.COLUMN_NAME_ACTIVITY_TEMPLATE_ID, activityTemplate.get_id());
 		long newRowId = db.insert(ActivityEntry.TABLE_NAME, null, values);
 		return newRowId;
@@ -81,7 +86,8 @@ public class ActivityDbHelper extends SQLiteOpenHelper {
 			);
 			String location = cursor.getString(cursor.getColumnIndexOrThrow(ActivityEntry.COLUMN_NAME_LOCATION));
 			long userId = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityEntry.COLUMN_NAME_USER_ID));
-			templates.add(new Activity(_id, userId, location, template));
+			Date timeStarted = new SimpleDateFormat().parse(cursor.getString(cursor.getColumnIndexOrThrow(ActivityEntry.COLUMN_NAME_TIME_STARTED)));
+			templates.add(new Activity(_id, userId, location, template, timeStarted));
 		}
 		cursor.close();
 		return templates;

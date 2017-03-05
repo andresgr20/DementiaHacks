@@ -10,7 +10,6 @@ public final class ActivityTemplateContract {
 		public static final String COLUMN_NAME_IDEAL_LOCATION = "idealLocation";
 		public static final String COLUMN_NAME_NAME = "name";
 		public static final String COLUMN_NAME_DESCRIPTION = "description";
-		public static final String COLUMN_NAME_TIME_STARTED = "timeStarted";
 		public static final String COLUMN_NAME_CREATOR_ID = "creatorId";
 		public static final String COLUMN_NAME_PATIENT_ID = "patientId";
 	}

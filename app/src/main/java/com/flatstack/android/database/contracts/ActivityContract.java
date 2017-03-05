@@ -10,5 +10,6 @@ public final class ActivityContract {
 		public static final String COLUMN_NAME_USER_ID = "userId";
 		public static final String COLUMN_NAME_LOCATION = "location";
 		public static final String COLUMN_NAME_ACTIVITY_TEMPLATE_ID = "activityTemplateId";
+		public static final String COLUMN_NAME_TIME_STARTED = "timeStarted";
 	}
 }

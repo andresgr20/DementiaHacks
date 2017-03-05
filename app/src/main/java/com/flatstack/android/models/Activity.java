@@ -1,5 +1,7 @@
 package com.flatstack.android.models;
 
+import java.util.Date;
+
 /**
  * Created by Aaron on 2017-03-04.
  */
@@ -9,12 +11,14 @@ public class Activity {
 	private long userId;
 	private String location;
 	private ActivityTemplate activityTemplate;
+	private Date timeStarted;
 
-	public Activity(long _id, long userId, String location, ActivityTemplate activityTemplate) {
+	public Activity(long _id, long userId, String location, ActivityTemplate activityTemplate, Date timeStarted) {
 		this.set_id(_id);
 		this.setUserId(userId);
 		this.setLocation(location);
 		this.setActivityTemplate(activityTemplate);
+		this.setTimeStarted(timeStarted);
 	}
 
 	public String getLocation() {
@@ -47,5 +51,23 @@ public class Activity {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public Date getTimeStarted() {
+		return timeStarted;
+	}
+
+	public void setTimeStarted(Date timeStarted) {
+		this.timeStarted = timeStarted;
+	}
+
+	@Override public String toString() {
+		return "Activity{" +
+				"_id=" + _id +
+				", userId=" + userId +
+				", location='" + location + '\'' +
+				", activityTemplate=" + activityTemplate +
+				", timeStarted=" + timeStarted +
+				'}';
 	}
 }

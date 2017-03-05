@@ -8,9 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.flatstack.android.database.contracts.ActivityTemplateContract.ActivityTemplateEntry;
 import com.flatstack.android.models.ActivityTemplate;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -22,7 +20,6 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 			ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID,
 			ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID,
 			ActivityTemplateEntry.COLUMN_NAME_IDEAL_LOCATION,
-			ActivityTemplateEntry.COLUMN_NAME_TIME_STARTED
 	};
 
 	private static final String DATABASE_NAME = "ActivityTemplate.db";
@@ -37,7 +34,6 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 				ActivityTemplateEntry.COLUMN_NAME_DESCRIPTION + " TEXT, " +
 				ActivityTemplateEntry.COLUMN_NAME_IDEAL_LOCATION + " TEXT, " +
 				ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID + " INTEGER, " +
-				ActivityTemplateEntry.COLUMN_NAME_TIME_STARTED + " DATETIME, " +
 				ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID + " INTEGER)");
 	}
 
@@ -89,8 +85,7 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 			String description = cursor.getString(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_DESCRIPTION));
 			long patientId2 = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID));
 			long createId = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID));
-			Date timeStarted = new SimpleDateFormat().parse(cursor.getString(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_TIME_STARTED)));
-			template = new ActivityTemplate(_id2, name, description, patientId2, createId, "", timeStarted);
+			template = new ActivityTemplate(_id2, name, description, patientId2, createId, "");
 		}
 		cursor.close();
 		return template;
@@ -114,8 +109,7 @@ public class ActivityTemplateDbHelper extends SQLiteOpenHelper {
 			String description = cursor.getString(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_DESCRIPTION));
 			long patientId2 = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID));
 			long createId = cursor.getLong(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID));
-			Date timeStarted = new SimpleDateFormat().parse(cursor.getString(cursor.getColumnIndexOrThrow(ActivityTemplateEntry.COLUMN_NAME_TIME_STARTED)));
-			templates.add(new ActivityTemplate(_id, name, description, patientId2, createId, "", timeStarted));
+			templates.add(new ActivityTemplate(_id, name, description, patientId2, createId, ""));
 		}
 		cursor.close();
 		return templates;

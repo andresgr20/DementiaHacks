@@ -13,16 +13,14 @@ public class ActivityTemplate {
 	private long creatorId;
 	private long patientId;
 	private String idealLocation;
-	private Date timeStarted;
 
-	public ActivityTemplate(long _id, String name, String description, long patientId, long creatorId, String idealLocation, Date timeStarted) {
+	public ActivityTemplate(long _id, String name, String description, long patientId, long creatorId, String idealLocation) {
 		this.set_id(_id);
 		this.name = name;
 		this.description = description;
 		this.setPatientId(patientId);
 		this.setCreatorId(creatorId);
 		this.idealLocation = idealLocation;
-		this.timeStarted = timeStarted;
 	}
 
 	public String getName() {
@@ -49,14 +47,6 @@ public class ActivityTemplate {
 		this.idealLocation = idealLocation;
 	}
 
-	public Date getTimeStarted() {
-		return timeStarted;
-	}
-
-	public void setTimeStarted(Date timeStarted) {
-		this.timeStarted = timeStarted;
-	}
-
 	public void set_id(long _id) {
 		this._id = _id;
 	}
@@ -79,5 +69,16 @@ public class ActivityTemplate {
 
 	public long getCreatorId() {
 		return creatorId;
+	}
+
+	@Override public String toString() {
+		return "ActivityTemplate{" +
+				"_id=" + _id +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", creatorId=" + creatorId +
+				", patientId=" + patientId +
+				", idealLocation='" + idealLocation + '\'' +
+				'}';
 	}
 }

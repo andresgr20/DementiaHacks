@@ -19,13 +19,6 @@ public class User {
 		this.setName(name);
 	}
 
-	public User(String name, String username, String password, String role) {
-		this.setName(name);
-		this.setUsername(username);
-		this.setPassword(password);
-		this.setRole(role);
-	}
-
 	public long get_id() {
 		return _id;
 	}
@@ -64,5 +57,15 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override public String toString() {
+		return "User{" +
+				"_id=" + _id +
+				", username='" + username + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", role='" + role + '\'' +
+				'}';
 	}
 }
