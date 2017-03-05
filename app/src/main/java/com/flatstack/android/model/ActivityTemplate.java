@@ -1,6 +1,4 @@
-package com.flatstack.android.models;
-
-import java.util.Date;
+package com.flatstack.android.model;
 
 /**
  * Created by Aaron on 2017-03-04.

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.flatstack.android.database.contracts.UserContract.UserEntry;
-import com.flatstack.android.models.User;
+import com.flatstack.android.model.User;
 
 public class UserDb extends SQLiteOpenHelper {
 

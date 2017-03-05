@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.flatstack.android.database.contracts.ActivityTemplateContract.ActivityTemplateEntry;
-import com.flatstack.android.models.ActivityTemplate;
+import com.flatstack.android.model.ActivityTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,30 +42,30 @@ public class ActivityTemplateDb extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public long insert(String name, String description, String patientId, String creatorId) {
+	public long insert(String name, String description, long patientId, long creatorId) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID, creatorId);
+		values.put(ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID, Long.valueOf(creatorId).toString());
 		values.put(ActivityTemplateEntry.COLUMN_NAME_DESCRIPTION, description);
-		values.put(ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID, patientId);
+		values.put(ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID, Long.valueOf(patientId).toString());
 		values.put(ActivityTemplateEntry.COLUMN_NAME_NAME, name);
 		long newRowId = db.insert(ActivityTemplateEntry.TABLE_NAME, null, values);
 		return newRowId;
 	}
 
-	public List<ActivityTemplate> getActivityTemplatesByPatient(long patientId) throws Exception {
+	public List<ActivityTemplate> getActivityTemplatesByPatient(long patientId) {
 		String selection = ActivityTemplateEntry.COLUMN_NAME_PATIENT_ID + " = ?";
 		String[] selectionsArgs = { Long.valueOf(patientId).toString() };
 		return getActivityTemplates(selection, selectionsArgs);
 	}
 
-	public List<ActivityTemplate> getActivityTemplatesByCreator(long creatorId) throws Exception {
+	public List<ActivityTemplate> getActivityTemplatesByCreator(long creatorId) {
 		String selection = ActivityTemplateEntry.COLUMN_NAME_CREATOR_ID + " = ?";
 		String[] selectionsArgs = { Long.valueOf(creatorId).toString() };
 		return getActivityTemplates(selection, selectionsArgs);
 	}
 
-	public ActivityTemplate getActivityTemplateByID(long _id) throws Exception {
+	public ActivityTemplate getActivityTemplateByID(long _id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selection = ActivityTemplateEntry._ID + " = ?";
 		String[] selectionsArgs = { Long.valueOf(_id).toString() };
@@ -91,7 +91,7 @@ public class ActivityTemplateDb extends SQLiteOpenHelper {
 		return template;
 	}
 
-	private List<ActivityTemplate> getActivityTemplates(String selection, String[] selectionsArgs) throws Exception {
+	private List<ActivityTemplate> getActivityTemplates(String selection, String[] selectionsArgs) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(
 				ActivityTemplateEntry.TABLE_NAME,
